@@ -242,7 +242,6 @@ repositories {
 }
 
 publishing {
-	dependsOn('buildJar')
     repositories {
         maven {
             name = "GitHubPackages"
@@ -255,8 +254,7 @@ publishing {
     }
     publications {
         gpr(MavenPublication) {
-            from components.java
-			artifacts = [buildJar]
+			artifact jar
         }
     }
 }
