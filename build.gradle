@@ -255,7 +255,7 @@ publishing {
     publications {
         gpr(MavenPublication) {
             from components.java
-			 artifacts = [sourceJar]
+			 artifacts = [buildJar]
         }
     }
 }
