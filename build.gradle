@@ -223,7 +223,7 @@ task buildJar (type: Jar) {
 }
 
 task build(overwrite: true) {
-    dependsOn('buildJar', 'sourcesJar')
+    dependsOn('buildJar')
 }
 
 shadowJar {
