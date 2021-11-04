@@ -223,7 +223,7 @@ task buildJar (type: Jar) {
 }
 
 task build(overwrite: true) {
-    dependsOn('buildJar')
+    dependsOn('buildJar', 'sourcesJar')
 }
 
 shadowJar {
@@ -254,7 +254,8 @@ publishing {
     }
     publications {
         gpr(MavenPublication) {
-            from(components.java)
+            from components.java
+			 artifacts = [sourceJar]
         }
     }
 }
