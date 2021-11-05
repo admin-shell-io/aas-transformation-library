@@ -5,20 +5,18 @@
  */
 package com.sap.dsc.aas.lib.transform;
 
-import com.google.common.base.Strings;
-import com.sap.dsc.aas.lib.exceptions.NoResultByXPathException;
+import java.lang.invoke.MethodHandles;
+import java.net.URI;
+import java.util.*;
+import java.util.stream.Collectors;
+
 import org.dom4j.Node;
 import org.dom4j.XPath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.invoke.MethodHandles;
-import java.net.URI;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import com.google.common.base.Strings;
+import com.sap.dsc.aas.lib.exceptions.NoResultByXPathException;
 
 public class XPathHelper {
 
@@ -44,7 +42,6 @@ public class XPathHelper {
 	public List<Node> getNodes(Node parentNode, String xpathExpression) {
 		return createXPath(parentNode, xpathExpression).selectNodes(parentNode);
 	}
-
 
 	public String getStringValueOrNull(Node node, String xPath) {
 		Object result = createXPath(node, xPath).evaluate(node);
@@ -91,11 +88,11 @@ public class XPathHelper {
 	 */
 	protected XPath createXPath(Node parentNode, String xpathExpression) {
 		XPath xpath = parentNode.createXPath(xpathExpression);
-        if(!namespaces.isEmpty())
-			xpath.setNamespaceURIs(namespaces);
+
+		xpath.setNamespaceURIs(namespaces);
+
 		return xpath;
 	}
-
 
 	private Map<String, String> namespaces = new HashMap<>();
 

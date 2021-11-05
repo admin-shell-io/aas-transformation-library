@@ -1,12 +1,14 @@
 package com.sap.dsc.aas.lib.transform;
 
+import java.io.InputStream;
+
+import org.dom4j.Document;
+
 import com.sap.dsc.aas.lib.config.pojo.ConfigTransformToAas;
 import com.sap.dsc.aas.lib.exceptions.TransformationException;
 import com.sap.dsc.aas.lib.transform.validation.SchemaValidator;
-import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
-import org.dom4j.Document;
 
-import java.io.InputStream;
+import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 
 public abstract class DocumentTransformer {
 
