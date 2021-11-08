@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<UANodeSet LastModified="2021-09-24T15:02:42.641Z" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd"
-           xmlns:si="http://www.siemens.com/OPCUA/2017/SimaticNodeSetExtensions">
+<UANodeSet LastModified="2021-09-24T15:02:42.641Z" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:si="http://www.siemens.com/OPCUA/2017/SimaticNodeSetExtensions" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <NamespaceUris>
         <Uri>http://iwu.fraunhofer.de/c32/arno</Uri>
     </NamespaceUris>
