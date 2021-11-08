@@ -23,6 +23,11 @@ jobs:
           distribution: 'adopt'
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+      - name: Delete old Package
+        uses: actions/delete-package-versions@v1
+        continue-on-error: true
+        with:
+          package-name: 'com.sap.dsc.aas.lib.aml.aml-transformation-library'
       - name: Publish package
         run: gradle -i publish
         env:
