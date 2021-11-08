@@ -12,9 +12,6 @@ import java.lang.invoke.MethodHandles;
 import java.util.*;
 import java.util.stream.Collectors;
 
-//FIXME the purpose is to check feasibility of getting XPath expression for NodeId from browsepath
-// it was originally written using W3C library and then be switched directly to dom4j, so it needs a lot of improvements and optimization
-
 public class BrowsepathXPathBuilder implements XPathBuilder {
 
     private final XPathHelper xpathHelper;
@@ -46,19 +43,19 @@ public class BrowsepathXPathBuilder implements XPathBuilder {
     }
 
     @Override
-    public String pathExpression(String[] browosePath) {
-        if (browosePath == null || browosePath.length == 0 || browosePath[0] == null || browosePath[0].replace("/", "").trim().isEmpty()) {
+    public String pathExpression(String[] browsePath) {
+        if (browsePath == null || browsePath.length == 0 || browsePath[0] == null || browsePath[0].replace("/", "").trim().isEmpty()) {
             return null;
         }
-        String exp = "/UANodeSet/*[@BrowseName=\"" + browosePath[0] + "\"]/@NodeId";
-        if (browosePath.length == 1) {
+        String exp = "/UANodeSet/*[@BrowseName=\"" + browsePath[0] + "\"]/@NodeId";
+        if (browsePath.length == 1) {
             return exp;
         }
         List<Node> parentIDs = xpathHelper.getNodes(root, exp);
         if (parentIDs == null || parentIDs.isEmpty()) {
             return null;
         }
-        return getExpForBrowsePath(Arrays.copyOfRange(browosePath, 1, browosePath.length), parentIDs.get(0).getText());
+        return getExpForBrowsePath(Arrays.copyOfRange(browsePath, 1, browsePath.length), parentIDs.get(0).getText());
     }
 
     private String getExpForBrowsePath(String[] browsePath, String parentID) {
@@ -105,8 +102,9 @@ public class BrowsepathXPathBuilder implements XPathBuilder {
                 }
             }
         }
-        if (parent == null || (parent.getNodeType() == Node.ELEMENT_NODE && ((Element) parent).attributeCount() == 0 ))
+        if (parent == null || (parent.getNodeType() == Node.ELEMENT_NODE && ((Element) parent).attributeCount() == 0 )) {
             return prev == null ? null : prev.getText();
+        }
         Element parentElem = (Element) parent;
         String parentId =  parentElem.attributeValue("NodeId");
         if (browsePath.length == 1 &&  parentElem.attributeCount() > 0)
