@@ -27,7 +27,7 @@ jobs:
         uses: actions/delete-package-versions@v1
         continue-on-error: true
         with:
-          package-name: 'com.sap.dsc.aas.lib.aml.aml-transformation-library'
+          package-name: 'com.sap.dsc.aas.lib.aas-transformation-library'
       - name: Publish package
         run: gradle -i publish
         env:
