@@ -19,6 +19,7 @@ public class BrowsepathXPathBuilder implements XPathBuilder {
     private final Set<String> hierarchyReferences;
     private String hierarchyIsConstraint ;
     private Document root;
+    private static BrowsepathXPathBuilder instance;
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     public BrowsepathXPathBuilder(Document root){
@@ -40,6 +41,14 @@ public class BrowsepathXPathBuilder implements XPathBuilder {
             hierarchyIsConstraint += "@ReferenceType=\"" + ref + "\" or ";
         }
         hierarchyIsConstraint = hierarchyIsConstraint.substring(0, hierarchyIsConstraint.length() - 3) + ") and @IsForward= \"false\"";
+        instance = this;
+    }
+
+    public static BrowsepathXPathBuilder getInstance(){
+        if(instance != null){
+            return instance;
+        }
+        throw new IllegalArgumentException("BrowsepathBuilder is not set jet");
     }
 
     @Override
