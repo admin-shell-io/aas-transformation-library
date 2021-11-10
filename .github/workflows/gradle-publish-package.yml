@@ -29,6 +29,6 @@ jobs:
         with:
           package-name: 'com.sap.dsc.aas.lib.aas-transformation-library'
       - name: Publish package
-        run: gradle -i publish
+        run: ./gradlew -i publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
