@@ -17,11 +17,18 @@ public class BrowsePathExpr implements Expression {
     @Override
     public String evaluate(TransformationContext ctx) {
 
-        if (!ctx.getContextItem().isPresent() ) {
-            throw new IllegalArgumentException("no Node Context is given.");
-        }
+        //FIXME Node context is not relevant to Browsepath functionality
+//        if (!ctx.getContextItem().isPresent() ) {
+//            throw new IllegalArgumentException("no Node Context is given.");
+//        }
         List<String> path = args.stream().map(arg -> arg.evaluate(ctx)).filter(val -> val instanceof String).map(val -> (String) val).collect(Collectors.toList());
         String[] pathElems = new String[path.size()];
-        return BrowsepathXPathBuilder.getInstance().getNodeIdFromBrowsePath(path.toArray(pathElems));
+        String nodeId = BrowsepathXPathBuilder.getInstance().getNodeIdFromBrowsePath(path.toArray(pathElems));
+        if(path != null && !path.isEmpty() && nodeId != null){
+            return nodeId;
+        }
+        else{
+            throw new IllegalArgumentException("@uaBrowsePath should be array of path elements as String, and should match exactly one UaNode.");
+        }
     }
 }

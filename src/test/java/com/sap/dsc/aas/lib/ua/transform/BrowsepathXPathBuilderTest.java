@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -66,6 +67,16 @@ public class BrowsepathXPathBuilderTest {
         assertNotNull(aas);
         assertEquals(1, aas.getSubmodels().size());
         assertEquals(aas.getSubmodels().get(0).getIdShort(), "ns=1;i=1010");
+    }
+
+    @Test
+    void testInvalidConfigFile() throws IOException {
+
+        MappingSpecification spec = parser
+                .loadMappingSpecification("src/test/resources/mappings/generic/invalidBrowsepathTest.json");
+        RuntimeException e = assertThrows( RuntimeException.class, () -> transformer.createShellEnv(xmlDoc, spec));
+        Throwable cause = e.getCause();
+        assertThat(cause instanceof IllegalArgumentException);
     }
 
 }

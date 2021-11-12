@@ -6,21 +6,21 @@
       "submodels": [
         {
           "@foreach": {
-            "@uaBrowsePath":
+            "@uaBrowsePath":[
               [
                 "1:ExampleObject",
                 "1:ExampleIntegerVariable"
               ]
-
+            ]
           },
           "@bind": {
             "idShort": {
-              "@uaBrowsePath":
+              "@uaBrowsePath":[
                 [
                   "1:ExampleObject",
                   "1:ExampleIntegerVariable"
                 ]
-
+              ]
             }
           }
         }

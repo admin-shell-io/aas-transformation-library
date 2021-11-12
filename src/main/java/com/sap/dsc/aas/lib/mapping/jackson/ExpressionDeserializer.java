@@ -69,6 +69,9 @@ public class ExpressionDeserializer extends JsonDeserializer<Expression> {
                             case "uaBrowsePath":
                                 result = new BrowsePathExpr(argsList);
                                 break;
+                            case "uaChildren":
+                                result = new UaChildrenExpr(argsList);
+                                break;
                             case "var":
                                 if (argsList.size() == 1 &&
                                     argsList.get(0) instanceof ConstantExpr &&
