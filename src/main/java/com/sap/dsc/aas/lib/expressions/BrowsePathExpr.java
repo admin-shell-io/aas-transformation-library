@@ -24,7 +24,7 @@ public class BrowsePathExpr implements Expression {
         List<String> path = args.stream().map(arg -> arg.evaluate(ctx)).filter(val -> val instanceof String).map(val -> (String) val).collect(Collectors.toList());
         String[] pathElems = new String[path.size()];
         String nodeId = BrowsepathXPathBuilder.getInstance().getNodeIdFromBrowsePath(path.toArray(pathElems));
-        if(path != null && !path.isEmpty() && nodeId != null){
+        if(!path.isEmpty() && nodeId != null){
             return nodeId;
         }
         else{
