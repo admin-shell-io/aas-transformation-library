@@ -27,7 +27,7 @@ public class BrowsepathXPathBuilder implements XPathBuilder {
         String DEFAULT_NS = "http://opcfoundation.org/UA/";
         xpathHelper = XPathHelper.getInstance();
         hierarchyReferences = new HashSet<>();
-        hierarchyReferences.addAll(Arrays.asList(Hierarchy.HAS_COMPONENT.nodeId, Hierarchy.HAS_PROPERTY.nodeId, Hierarchy.ORGANIZES.nodeId));
+        hierarchyReferences.addAll(Hierarchy.hierarchyReferences());
         namespaceURIs = new ArrayList<>();
         namespaceURIs.add(DEFAULT_NS);
         namespaceURIs.addAll(root.getRootElement().element("NamespaceUris").elements("Uri")
@@ -274,14 +274,15 @@ public class BrowsepathXPathBuilder implements XPathBuilder {
     }
 
     enum Hierarchy {
-        HAS_COMPONENT("i=47"), HAS_PROPERTY("i=46"), ORGANIZES("i=35");
+        HAS_COMPONENT("i=47"), HAS_PROPERTY("i=46"), ORGANIZES("i=35"),
+        HAS_CHILD("i=34"), AGGREGATES("i=44"), HAS_SUBTYPE("i=45");
         String nodeId;
 
         Hierarchy(String nodeId) {
             this.nodeId = nodeId;
         }
         public static Set<String> hierarchyReferences(){
-            return new HashSet<>(Arrays.asList(HAS_COMPONENT.nodeId, HAS_PROPERTY.nodeId, ORGANIZES.nodeId));
+            return new HashSet<>(Arrays.asList(HAS_COMPONENT.nodeId, HAS_PROPERTY.nodeId, ORGANIZES.nodeId, HAS_CHILD.nodeId, AGGREGATES.nodeId, HAS_SUBTYPE.nodeId));
         }
     }
 
